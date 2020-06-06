@@ -6,34 +6,30 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-head',
   templateUrl: './head.component.html',
-  styleUrls: ['./head.component.css']
+  styleUrls: ['./head.component.css'],
 })
 export class HeadComponent implements OnInit {
-  try : string = '';
-  headdata:Object ={} ;
-  @Input() countryName:string ;
-  constructor(private services:AllService,private httpObj:HttpClient) { 
-  }
+  try: string = '';
+  headdata: Object = {};
+  countryName: string = 'india';
+  constructor(private services: AllService, private httpObj: HttpClient) {}
   ngOnInit(): void {
-    
     console.log(this.headdata);
     this.getHead();
-
+    this.services.selectChanged.subscribe((country: string) => {
+      console.log(country);
+      this.countryName = country;
+      this.getHead();
+    });
   }
 
-  getHead()
-  {
-    let dates =this.services.getTodayDifference(1);
-    this.alldata(dates).subscribe(
-      m=>this.headdata['data']= m
-    );
-
+  getHead() {
+    let dates = this.services.getTodayDifference(1);
+    this.alldata(dates).subscribe((m) => (this.headdata['data'] = m));
   }
 
-  alldata(obj:any):Observable<any>
-  {
-    let url=`https://api.covid19api.com/country/${this.countryName}?from=${obj.last}&to=${obj.current}`;
+  alldata(obj: any): Observable<any> {
+    let url = `https://api.covid19api.com/country/${this.countryName}?from=${obj.last}&to=${obj.current}`;
     return this.httpObj.get<any>(url);
   }
-
 }

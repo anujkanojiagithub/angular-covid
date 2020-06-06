@@ -1,20 +1,45 @@
-<app-head [countryName]='slug'></app-head>
+<app-head></app-head>
 <div class="row">
-    <div class="col-md-3">
-        {{slug}}
-        <select  class="form-control" [(ngModel)]="slug"  id="country">
-            
-            <option *ngFor="let m of alldata['data']"    value="{{m.Slug}}"  >{{m.Country}}</option>
-                
-        </select>
-    </div>
+  <div class="col-md-3">
+    {{ slug }}
+    <select
+      class="form-control"
+      [(ngModel)]="slug"
+      id="country"
+      (change)="onchange()"
+    >
+      <option *ngFor="let m of alldata['data']" value="{{ m.Slug }}">{{
+        m.Country
+      }}</option>
+    </select>
+  </div>
 
-    <div class="col-md-5"></div>
+  <div class="col-md-5"></div>
 
-    <div class="col-md-4">
-        <input class="btn btn-primary" type="button" value="7 Days" (click)="days = 7">
-        <input class="btn btn-primary" type="button" value="15 Days" (click)="days = 15">
-        <input class="btn btn-primary" type="button" value="30 Days" (click)="days = 30">
-        <input class="btn btn-primary" type="button" value="60 Days" (click)="days = 60">
-    </div>
+  <div class="col-md-4">
+    <input
+      class="btn btn-primary"
+      type="button"
+      value="7 Days"
+      (click)="days = 7"
+    />
+    <input
+      class="btn btn-primary"
+      type="button"
+      value="15 Days"
+      (click)="days = 15"
+    />
+    <input
+      class="btn btn-primary"
+      type="button"
+      value="30 Days"
+      (click)="days = 30"
+    />
+    <input
+      class="btn btn-primary"
+      type="button"
+      value="60 Days"
+      (click)="days = 60"
+    />
+  </div>
 </div>
